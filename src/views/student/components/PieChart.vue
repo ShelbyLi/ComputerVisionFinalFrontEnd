@@ -31,9 +31,9 @@ export default {
     }
   },
   mounted() {
-    this.$nextTick(() => {
-      this.initChart()
-    })
+    // this.$nextTick(() => {
+    //   this.initChart()
+    // })
   },
   beforeDestroy() {
     if (!this.chart) {
@@ -43,11 +43,11 @@ export default {
     this.chart = null
   },
   methods: {
-    initChart() {
+    initChart(data) {
       this.chart = echarts.init(this.$el, 'macarons')
 
-      fetchOption('pie').then((response) => {
-        const data = response.data
+      // fetchOption('pie').then((response) => {
+        // const data = response.data.pie
         this.chart.setOption({
           // title: {
           //     text: '退课原因预测',
@@ -56,7 +56,10 @@ export default {
           // },
           tooltip: {
             trigger: 'item',
-            formatter: '{a} <br/>{b} : {c} ({d}%)'
+            formatter: '{a} <br/>{b} : {c} ({d}%)',
+            textStyle: {
+              color: "white" //设置文字颜色
+            },
           },
           legend: {
             left: 'center',
@@ -84,7 +87,7 @@ export default {
             }
           ]
         })
-      })
+      // })
 
     }
   }

@@ -8,18 +8,60 @@
       <line-chart :chart-data="lineChartData" />
     </el-row> -->
 
+    <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">
+      <line-chart />
+    </el-row>
+
+    <div class="filter-container">
+        <el-select
+          ref="groupingCriteria"
+          v-model="listGroup.groupingCriteria"
+          placeholder="分组标准"
+          clearable
+          style="width: 150px"
+          class="filter-item"
+        >
+          <el-option
+            v-for="item in groupingCriteria"
+            :key="item"
+            :label="item"
+            :value="item"
+          />
+        </el-select>
+        <el-input
+          ref="groupingThreshold"
+          v-model="listGroup.groupingThreshold"
+          placeholder="分组阈值"
+          clearable
+          style="width: 150px"
+          class="filter-item"
+          @keyup.enter.native="handleGroup"
+        />
+        <el-button
+          v-waves
+          class="filter-item"
+          type="primary"
+          icon="el-icon-search"
+          @click="handleGroup"
+        >
+          分组
+        </el-button>
+    </div>
+
+
+
     <el-row :gutter="32">
       <el-col :xs="24" :sm="24" :lg="12">
         <div class="chart-wrapper">
-          <p>分组1退课原因</p>
+          <p>分组1 频繁项集支持率</p>
           <!-- <raddar-chart /> -->
-          <pie-chart />
+          <pie-chart ref="pieChart" />
         </div>
       </el-col>
       <el-col :xs="24" :sm="24" :lg="12">
         <div class="chart-wrapper">
-          <p>分组2退课原因</p>
-          <pie-chart-2 />
+          <p>分组2 频繁项集支持率</p>
+          <pie-chart-2 ref="pieChart2" />
         </div>
       </el-col>
       <!-- <el-col :xs="24" :sm="24" :lg="8">
@@ -40,13 +82,357 @@
         <box-card />
       </el-col>
     </el-row> -->
+    <div class="filter-container">
+      <el-table
+        :key="tableKey"
+        v-loading="listLoading"
+        :data="list"
+        fit
+        highlight-current-row
+        style="width: 100%"
+      >
+        <el-table-column label="分组1原因" width="100px" align="center">
+          <template slot-scope="scope">
+            {{ scope.$index + 1 }}
+          </template>
+        </el-table-column>
+
+        <el-table-column label="学生学习课程多少" width="155px" align="center">
+          <template slot-scope="{ row }">
+            <span v-if="row.isReason[0]">
+              <el-button
+                type="danger"
+                icon="el-icon-plus"
+                circle
+                size="small"
+              >
+              </el-button>
+            </span>
+            <span v-if="row.isReason[1]">
+              <el-button
+                type="success"
+                icon="el-icon-minus"
+                circle
+                size="small"
+              >
+              </el-button>
+            </span>
+          </template>
+        </el-table-column>
+        <el-table-column label="学生意志力高低" width="155px" align="center">
+          <template slot-scope="{ row }">
+            <span v-if="row.isReason[2]">
+              <el-button
+                type="danger"
+                icon="el-icon-plus"
+                circle
+                size="small"
+              >
+              </el-button>
+            </span>
+            <span v-if="row.isReason[3]">
+              <el-button
+                type="success"
+                icon="el-icon-minus"
+                circle
+                size="small"
+              >
+              </el-button>
+            </span>
+          </template>
+        </el-table-column>
+        <el-table-column label="课程内容量多少" width="155px" align="center">
+          <template slot-scope="{ row }">
+            <span v-if="row.isReason[4]">
+              <el-button
+                type="danger"
+                icon="el-icon-plus"
+                circle
+                size="small"
+              >
+              </el-button>
+            </span>
+            <span v-if="row.isReason[5]">
+              <el-button
+                type="success"
+                icon="el-icon-minus"
+                circle
+                size="small"
+              >
+              </el-button>
+            </span>
+          </template>
+        </el-table-column>
+        <el-table-column label="课程难度大小" width="155px" align="center">
+          <template slot-scope="{ row }">
+            <span v-if="row.isReason[6]">
+              <el-button
+                type="danger"
+                icon="el-icon-plus"
+                circle
+                size="small"
+              >
+              </el-button>
+            </span>
+            <span v-if="row.isReason[7]">
+              <el-button
+                type="success"
+                icon="el-icon-minus"
+                circle
+                size="small"
+              >
+              </el-button>
+            </span>
+          </template>
+        </el-table-column>
+        <el-table-column label="观看视频数量" width="155px" align="center">
+          <template slot-scope="{ row }">
+            <span v-if="row.isReason[8]">
+              <el-button
+                type="danger"
+                icon="el-icon-plus"
+                circle
+                size="small"
+              >
+              </el-button>
+            </span>
+            <span v-if="row.isReason[9]">
+              <el-button
+                type="success"
+                icon="el-icon-minus"
+                circle
+                size="small"
+              >
+              </el-button>
+            </span>
+          </template>
+        </el-table-column>
+        <el-table-column label="观看视频次数多少" width="155px" align="center">
+          <template slot-scope="{ row }">
+            <span v-if="row.isReason[10]">
+              <el-button
+                type="danger"
+                icon="el-icon-plus"
+                circle
+                size="small"
+              >
+              </el-button>
+            </span>
+            <span v-if="row.isReason[11]">
+              <el-button
+                type="success"
+                icon="el-icon-minus"
+                circle
+                size="small"
+              >
+              </el-button>
+            </span>
+          </template>
+        </el-table-column>
+        <el-table-column label="观看视频时长" width="155px" align="center">
+          <template slot-scope="{ row }">
+            <span v-if="row.isReason[12]">
+              <el-button
+                type="danger"
+                icon="el-icon-plus"
+                circle
+                size="small"
+              >
+              </el-button>
+            </span>
+            <span v-if="row.isReason[13]">
+              <el-button
+                type="success"
+                icon="el-icon-minus"
+                circle
+                size="small"
+              >
+              </el-button>
+            </span>
+          </template>
+        </el-table-column>
+        
+      </el-table>
+    </div>
+    <div class="filter-container">
+      <el-table
+        :key="tableKey"
+        v-loading="listLoading"
+        :data="list2"
+        fit
+        highlight-current-row
+        style="width: 100%"
+      >
+        <el-table-column label="分组2原因" width="100px" align="center">
+          <template slot-scope="scope">
+            {{ scope.$index + 1 }}
+          </template>
+        </el-table-column>
+
+        <el-table-column label="学生学习课程多少" width="155px" align="center">
+          <template slot-scope="{ row }">
+            <span v-if="row.isReason[0]">
+              <el-button
+                type="danger"
+                icon="el-icon-plus"
+                circle
+                size="small"
+              >
+              </el-button>
+            </span>
+            <span v-if="row.isReason[1]">
+              <el-button
+                type="success"
+                icon="el-icon-minus"
+                circle
+                size="small"
+              >
+              </el-button>
+            </span>
+          </template>
+        </el-table-column>
+        <el-table-column label="学生意志力高低" width="155px" align="center">
+          <template slot-scope="{ row }">
+            <span v-if="row.isReason[2]">
+              <el-button
+                type="danger"
+                icon="el-icon-plus"
+                circle
+                size="small"
+              >
+              </el-button>
+            </span>
+            <span v-if="row.isReason[3]">
+              <el-button
+                type="success"
+                icon="el-icon-minus"
+                circle
+                size="small"
+              >
+              </el-button>
+            </span>
+          </template>
+        </el-table-column>
+        <el-table-column label="课程内容量多少" width="155px" align="center">
+          <template slot-scope="{ row }">
+            <span v-if="row.isReason[4]">
+              <el-button
+                type="danger"
+                icon="el-icon-plus"
+                circle
+                size="small"
+              >
+              </el-button>
+            </span>
+            <span v-if="row.isReason[5]">
+              <el-button
+                type="success"
+                icon="el-icon-minus"
+                circle
+                size="small"
+              >
+              </el-button>
+            </span>
+          </template>
+        </el-table-column>
+        <el-table-column label="课程难度大小" width="155px" align="center">
+          <template slot-scope="{ row }">
+            <span v-if="row.isReason[6]">
+              <el-button
+                type="danger"
+                icon="el-icon-plus"
+                circle
+                size="small"
+              >
+              </el-button>
+            </span>
+            <span v-if="row.isReason[7]">
+              <el-button
+                type="success"
+                icon="el-icon-minus"
+                circle
+                size="small"
+              >
+              </el-button>
+            </span>
+          </template>
+        </el-table-column>
+        <el-table-column label="观看视频数量" width="155px" align="center">
+          <template slot-scope="{ row }">
+            <span v-if="row.isReason[8]">
+              <el-button
+                type="danger"
+                icon="el-icon-plus"
+                circle
+                size="small"
+              >
+              </el-button>
+            </span>
+            <span v-if="row.isReason[9]">
+              <el-button
+                type="success"
+                icon="el-icon-minus"
+                circle
+                size="small"
+              >
+              </el-button>
+            </span>
+          </template>
+        </el-table-column>
+        <el-table-column label="观看视频次数多少" width="155px" align="center">
+          <template slot-scope="{ row }">
+            <span v-if="row.isReason[10]">
+              <el-button
+                type="danger"
+                icon="el-icon-plus"
+                circle
+                size="small"
+              >
+              </el-button>
+            </span>
+            <span v-if="row.isReason[11]">
+              <el-button
+                type="success"
+                icon="el-icon-minus"
+                circle
+                size="small"
+              >
+              </el-button>
+            </span>
+          </template>
+        </el-table-column>
+        <el-table-column label="观看视频时长" width="155px" align="center">
+          <template slot-scope="{ row }">
+            <span v-if="row.isReason[12]">
+              <el-button
+                type="danger"
+                icon="el-icon-plus"
+                circle
+                size="small"
+              >
+              </el-button>
+            </span>
+            <span v-if="row.isReason[13]">
+              <el-button
+                type="success"
+                icon="el-icon-minus"
+                circle
+                size="small"
+              >
+              </el-button>
+            </span>
+          </template>
+        </el-table-column>
+        
+      </el-table>
+    </div>
   </div>
 </template>
 
 <script>
 // import GithubCorner from '@/components/GithubCorner'
 // import PanelGroup from './components/PanelGroup'
-// import LineChart from './components/LineChart'
+import LineChart from './components/LineChart'
 import RaddarChart from './components/RaddarChart'
 import PieChart from './components/PieChart'
 import PieChart2 from './components/PieChart2'
@@ -54,32 +440,17 @@ import BarChart from './components/BarChart'
 // import TransactionTable from './components/TransactionTable'
 // import TodoList from './components/TodoList'
 // import BoxCard from './components/BoxCard'
-
-// const lineChartData = {
-//   newVisitis: {
-//     expectedData: [100, 120, 161, 134, 105, 160, 165],
-//     actualData: [120, 82, 91, 154, 162, 140, 145]
-//   },
-//   messages: {
-//     expectedData: [200, 192, 120, 144, 160, 130, 140],
-//     actualData: [180, 160, 151, 106, 145, 150, 130]
-//   },
-//   purchases: {
-//     expectedData: [80, 100, 121, 104, 105, 90, 100],
-//     actualData: [120, 90, 100, 138, 142, 130, 130]
-//   },
-//   shoppings: {
-//     expectedData: [130, 140, 141, 142, 145, 150, 160],
-//     actualData: [120, 82, 91, 154, 162, 140, 130]
-//   }
-// }
+import waves from "@/directive/waves"; // waves directive
+import {
+    postStudentGroup
+} from "@/api/student";
 
 export default {
   name: 'DashboardAdmin',
   components: {
     // GithubCorner,
     // PanelGroup,
-    // LineChart,
+    LineChart,
     RaddarChart,
     PieChart,
     BarChart,
@@ -88,15 +459,37 @@ export default {
     // TodoList,
     // BoxCard
   },
+  directives: { waves },
   data() {
     return {
     //   lineChartData: lineChartData.newVisitis
+      listGroup: {
+          groupingCriteria: "",
+          groupingThreshold: null
+      },
+      groupingCriteria: ["学生课程总数", "学生视频总数", "学生个人退课率", "课程所有视频数", "课程退课率"],
+      
+      tableKey: 0, // 我不知道有啥用
+      list: null,
+      list2: null,
+      listLoading: false,
     }
   },
   methods: {
     // handleSetLineChartData(type) {
     //   this.lineChartData = lineChartData[type]
     // }
+    
+    handleGroup() {
+      this.listLoading = true;
+      postStudentGroup(this.listGroup).then((response) => {
+        this.list = response.data.records[0];
+        this.list2 = response.data.records[1]
+        this.listLoading = false;
+        this.$refs.pieChart.initChart(response.data.pie)
+        this.$refs.pieChart2.initChart(response.data.pie2)
+      })
+    }
   }
 }
 </script>

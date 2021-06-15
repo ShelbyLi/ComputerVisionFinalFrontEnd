@@ -115,8 +115,44 @@ module.exports = [
       type: 'post',
       response: config => {
         return {
-            code: 20000,
-            msg: "ok"
+          code: 20000,
+          data: {
+            pie: {
+                legendData: ['学生意志力低', '学生学习课程多', '课程内容多', '课程难度大', '观看视频数量少', '观看视频次数少', '观看视频时长少'],
+                seriesData: [
+                    { value: 220, name: '学生意志力低' },
+                    { value: 240, name: '学生学习课程多' },
+                    { value: 149, name: '课程内容多' },
+                    { value: 149, name: '课程难度大' },
+                    { value: 100, name: '观看视频数量少' },
+                    { value: 59, name: '观看视频次数少' },
+                    { value: 70, name: '观看视频时长少' }
+                  ],
+                },
+            pie2: {
+                legendData: ['学生意志力低', '学生学习课程多', '课程内容多', '课程难度大', '观看视频数量少', '观看视频次数少', '观看视频时长少'],
+                seriesData: [
+                    { value: 20, name: '学生意志力低' },
+                    { value: 20, name: '学生学习课程多' },
+                    { value: 15, name: '课程内容多' },
+                    { value: 19, name: '课程难度大' },
+                    { value: 10, name: '观看视频数量少' },
+                    { value: 9, name: '观看视频次数少' },
+                    { value: 10, name: '观看视频时长少' }
+                  ],
+                },
+            records: 
+            [
+              [
+                {isReason: [0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0]},
+                {isReason: [1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0]}
+              ],
+              [
+                {isReason: [0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0]},
+                {isReason: [1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0]}
+              ]
+            ]
+          }
         }
       }
     }

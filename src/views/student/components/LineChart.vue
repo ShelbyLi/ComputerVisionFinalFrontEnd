@@ -85,7 +85,10 @@ export default {
           axisPointer: {
             type: 'cross'
           },
-          padding: [5, 10]
+          padding: [5, 10],
+          textStyle: {
+            color: "white" //设置文字颜色
+          },
         },
         yAxis: {
           axisTick: {
@@ -99,10 +102,13 @@ export default {
         series: [{
           name: '最大值', itemStyle: {
             normal: {
-              color: '#2EC7C9',
+              color: '#FF005A',
               lineStyle: {
-                color: '#2EC7C9',
+                color: '#FF005A',
                 width: 2
+              },
+              areaStyle: {
+                color: '#f3f8ff'
               }
             }
           },
@@ -114,7 +120,7 @@ export default {
           animationEasing: 'cubicInOut'
         },
         {
-          name: '最小值',
+          name: '平均值',
           smooth: true,
           type: 'line',
           itemStyle: {
@@ -123,9 +129,6 @@ export default {
               lineStyle: {
                 color: '#3888fa',
                 width: 2
-              },
-              areaStyle: {
-                color: '#f3f8ff'
               }
             }
           },
@@ -135,14 +138,14 @@ export default {
           animationEasing: 'quadraticOut'
         },
         {
-          name: '平均值',
+          name: '最小值',
           smooth: true,
           type: 'line',
           itemStyle: {
             normal: {
-              color: '#FF005A',
+              color: '#2EC7C9',
               lineStyle: {
-                color: '#FF005A',
+                color: '#2EC7C9',
                 width: 2
               },
               areaStyle: {

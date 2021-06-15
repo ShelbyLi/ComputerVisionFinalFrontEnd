@@ -106,6 +106,7 @@ export default {
       })
     },
     handleLogin() {
+      // this.$router.push({path: "/student/chart"})
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true

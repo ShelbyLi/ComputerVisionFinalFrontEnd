@@ -14,8 +14,6 @@ const name = defaultSettings.title || 'vue Admin Template' // page title
 // You can change the port by the following methods:
 // port = 9528 npm run dev OR npm run dev --port = 9528
 const port = process.env.port || process.env.npm_config_port || 9528 // dev port
-// 这个端口号应该是我显示页面上面的 应该只要vue.config.js里面的baseurl改成那个就行了吧
-// const port = 8080
 
 // All configuration item explanations can be find in https://cli.vuejs.org/config/
 module.exports = {
@@ -26,7 +24,7 @@ module.exports = {
    * In most cases please use '/' !!!
    * Detail: https://cli.vuejs.org/config/#publicpath
    */
-  publicPath: '/', // 不是这里改 这里改了会变成localhost:8080/10.64...
+  publicPath: '/',
   outputDir: 'dist',
   assetsDir: 'static',
   lintOnSave: process.env.NODE_ENV === 'development',
@@ -48,11 +46,7 @@ module.exports = {
       alias: {
         '@': resolve('src')
       }
-    },
-    // externals: {
-    //   'BMap': 'BMap',
-    //   'BMap_Symbol_SHAPE_POINT': 'BMap_Symbol_SHAPE_POINT'
-    // }
+    }
   },
   chainWebpack(config) {
     // it can improve the speed of the first screen, it is recommended to turn on preload
@@ -93,7 +87,7 @@ module.exports = {
             .plugin('ScriptExtHtmlWebpackPlugin')
             .after('html')
             .use('script-ext-html-webpack-plugin', [{
-              // `runtime` must same as runtimeChunk name. default is `runtime`
+            // `runtime` must same as runtimeChunk name. default is `runtime`
               inline: /runtime\..*\.js$/
             }])
             .end()
@@ -127,18 +121,3 @@ module.exports = {
       )
   }
 }
-
-
-// module.exports = {
-//   devServer: {
-//     before: require('./mymock/index.js')
-//   }
-// }
-// module.exports = {
-// 	configureWebpack:{
-// 		externals:{
-// 	   	   'BMap': 'BMap',
-// 	   	   'BMap_Symbol_SHAPE_POINT':'BMap_Symbol_SHAPE_POINT'
-// 	    }
-// 	}
-// }

@@ -25,7 +25,7 @@ export function fetchOption(query) {
   return request({
     url: '/student/chart',
     method: 'get',
-    params: query
+    // params: query
   })
 }
 
