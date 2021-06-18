@@ -69,7 +69,7 @@ export default {
           },
           series: [
             {
-              name: '退课原因',
+              name: '支持度',
               type: 'pie',
               roseType: 'radius',
               radius: [15, 95],

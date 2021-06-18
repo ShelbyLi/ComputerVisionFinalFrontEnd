@@ -46,8 +46,8 @@ export default {
     initChart(data) {
       this.chart = echarts.init(this.$el, 'macarons')
 
-      // fetchOption('pie2').then((response) => {
-        // const data = response.data.pie2
+      // fetchOption('pie').then((response) => {
+        // const data = response.data.pie
         this.chart.setOption({
           // title: {
           //     text: '退课原因预测',
@@ -69,7 +69,7 @@ export default {
           },
           series: [
             {
-              name: '支持度',
+              name: '数量',
               type: 'pie',
               roseType: 'radius',
               radius: [15, 95],

@@ -5,12 +5,14 @@ const user = require('./user')
 const table = require('./table')
 const course = require('./course')
 const student = require('./student')
+const fruit = require('./fruit')
 
 const mocks = [
   ...user,
   ...table,
   ...course,
-  ...student
+  ...student,
+  ...fruit
 ]
 
 // for front mock

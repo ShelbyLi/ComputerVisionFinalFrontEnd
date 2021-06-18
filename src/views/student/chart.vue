@@ -9,8 +9,11 @@
     </el-row> -->
 
     <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">
-      <line-chart />
+      <box-plot/>
     </el-row>
+    <!-- <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">
+      <line-chart />
+    </el-row> -->
 
     <div class="filter-container">
         <el-select
@@ -53,14 +56,18 @@
     <el-row :gutter="32">
       <el-col :xs="24" :sm="24" :lg="12">
         <div class="chart-wrapper">
-          <p>分组1 频繁项集支持率</p>
+          <p>人数: {{count[0]}}</p>
+          <p>退课率: {{droprate[0]}}</p>
+          <p>分组1 频繁项集支持度</p>
           <!-- <raddar-chart /> -->
           <pie-chart ref="pieChart" />
         </div>
       </el-col>
       <el-col :xs="24" :sm="24" :lg="12">
         <div class="chart-wrapper">
-          <p>分组2 频繁项集支持率</p>
+          <p>人数: {{count[1]}}</p>
+          <p>退课率: {{droprate[1]}}</p>
+          <p>分组2 频繁项集支持度</p>
           <pie-chart-2 ref="pieChart2" />
         </div>
       </el-col>
@@ -433,17 +440,19 @@
 // import GithubCorner from '@/components/GithubCorner'
 // import PanelGroup from './components/PanelGroup'
 import LineChart from './components/LineChart'
-import RaddarChart from './components/RaddarChart'
+// import RaddarChart from './components/RaddarChart'
 import PieChart from './components/PieChart'
 import PieChart2 from './components/PieChart2'
-import BarChart from './components/BarChart'
+// import BarChart from './components/BarChart'
 // import TransactionTable from './components/TransactionTable'
 // import TodoList from './components/TodoList'
 // import BoxCard from './components/BoxCard'
+import BoxPlot from './components/Boxplot'
 import waves from "@/directive/waves"; // waves directive
 import {
     postStudentGroup
 } from "@/api/student";
+import Boxplot from './components/Boxplot.vue'
 
 export default {
   name: 'DashboardAdmin',
@@ -451,13 +460,14 @@ export default {
     // GithubCorner,
     // PanelGroup,
     LineChart,
-    RaddarChart,
+    // RaddarChart,
     PieChart,
-    BarChart,
+    // BarChart,
     PieChart2,
     // TransactionTable,
     // TodoList,
     // BoxCard
+    BoxPlot
   },
   directives: { waves },
   data() {
@@ -469,6 +479,8 @@ export default {
       },
       groupingCriteria: ["学生课程总数", "学生视频总数", "学生个人退课率", "课程所有视频数", "课程退课率"],
       
+      count: [],
+      droprate: [],
       tableKey: 0, // 我不知道有啥用
       list: null,
       list2: null,
@@ -483,6 +495,11 @@ export default {
     handleGroup() {
       this.listLoading = true;
       postStudentGroup(this.listGroup).then((response) => {
+        this.count = response.data.count
+        console.log('***************');
+        console.log(this.count);
+        this.droprate = response.data.dropRate
+        console.log(this.droprate);
         this.list = response.data.records[0];
         this.list2 = response.data.records[1]
         this.listLoading = false;

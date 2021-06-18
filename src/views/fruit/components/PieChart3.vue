@@ -69,7 +69,7 @@ export default {
           },
           series: [
             {
-              name: '支持度',
+              name: '数量',
               type: 'pie',
               roseType: 'radius',
               radius: [15, 95],

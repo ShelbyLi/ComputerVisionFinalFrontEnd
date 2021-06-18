@@ -77,78 +77,78 @@ export const constantRoutes = [
   //   ]
   // },
 
-  {
-    path: '/course',
-    component: Layout,
-    redirect: '/course/table',
-    name: 'Course',
-    meta: { title: '课程', icon: 'el-icon-notebook-1' },
-    children: [
-      {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/course/index'),
-        meta: { title: '课程信息', icon: 'table' }
-      },
-      {
-        path: 'chart',
-        name: 'Chart',
-        component: () => import('@/views/course/chart'),
-        meta: { title: '图表统计', icon: 'el-icon-pie-chart' }
-      }
-    ]
-  },
-  {
-    path: '/course/table',
-    component: Layout,
-    hidden: true,
-    children: [
-      {
-        path: 'info',
-        component: () => import('@/views/course/info'),
-        // TODO 梦想: 这个页面作为management的children 面包屑导航能回去
-        name: 'info',
-        meta: { title: '课程详细信息', icon: 'message', noCache: true } // 面包屑导航里显示的
-      }
-    ]
-  },
+  // {
+  //   path: '/course',
+  //   component: Layout,
+  //   redirect: '/course/table',
+  //   name: 'Course',
+  //   meta: { title: '课程', icon: 'el-icon-notebook-1' },
+  //   children: [
+  //     {
+  //       path: 'table',
+  //       name: 'Table',
+  //       component: () => import('@/views/course/index'),
+  //       meta: { title: '课程信息', icon: 'table' }
+  //     },
+  //     {
+  //       path: 'chart',
+  //       name: 'Chart',
+  //       component: () => import('@/views/course/chart'),
+  //       meta: { title: '图表统计', icon: 'el-icon-pie-chart' }
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '/course/table',
+  //   component: Layout,
+  //   hidden: true,
+  //   children: [
+  //     {
+  //       path: 'info',
+  //       component: () => import('@/views/course/info'),
+  //       // TODO 梦想: 这个页面作为management的children 面包屑导航能回去
+  //       name: 'info',
+  //       meta: { title: '课程详细信息', icon: 'message', noCache: true } // 面包屑导航里显示的
+  //     }
+  //   ]
+  // },
 
 
-  {
-    path: '/student',
-    component: Layout,
-    redirect: '/student/table',
-    name: 'Student',
-    meta: { title: '学生', icon: 'el-icon-user-solid' },
-    children: [
-      {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/student/index'),
-        meta: { title: '学生信息', icon: 'table' }
-      },
-      {
-        path: 'chart',
-        name: 'Chart',
-        component: () => import('@/views/student/chart'),
-        meta: { title: '图表统计', icon: 'el-icon-pie-chart' }
-      }
-    ]
-  },
-  {
-    path: '/student/table',
-    component: Layout,
-    hidden: true,
-    children: [
-      {
-        path: 'info',
-        component: () => import('@/views/student/info'),
-        // TODO 梦想: 这个页面作为management的children 面包屑导航能回去
-        name: 'info',
-        meta: { title: '学生选课详细信息', icon: 'message', noCache: true } // 面包屑导航里显示的
-      }
-    ]
-  },
+  // {
+  //   path: '/student',
+  //   component: Layout,
+  //   redirect: '/student/table',
+  //   name: 'Student',
+  //   meta: { title: '学生', icon: 'el-icon-user-solid' },
+  //   children: [
+  //     {
+  //       path: 'table',
+  //       name: 'Table',
+  //       component: () => import('@/views/student/index'),
+  //       meta: { title: '学生信息', icon: 'table' }
+  //     },
+  //     {
+  //       path: 'chart',
+  //       name: 'Chart',
+  //       component: () => import('@/views/student/chart'),
+  //       meta: { title: '图表统计', icon: 'el-icon-pie-chart' }
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '/student/table',
+  //   component: Layout,
+  //   hidden: true,
+  //   children: [
+  //     {
+  //       path: 'info',
+  //       component: () => import('@/views/student/info'),
+  //       // TODO 梦想: 这个页面作为management的children 面包屑导航能回去
+  //       name: 'info',
+  //       meta: { title: '学生选课详细信息', icon: 'message', noCache: true } // 面包屑导航里显示的
+  //     }
+  //   ]
+  // },
 
   // {
   //   path: '/form',
@@ -162,6 +162,19 @@ export const constantRoutes = [
   //     }
   //   ]
   // },
+
+  {
+    path: '/fruit',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'Fruit',
+        component: () => import('@/views/fruit/index'),
+        meta: { title: 'Fruit', icon: 'form' }
+      }
+    ]
+  },
 
   // {
   //   path: '/nested',
