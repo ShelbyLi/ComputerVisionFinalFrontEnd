@@ -2,10 +2,11 @@ const Mock = require('mockjs')
 
 const data = Mock.mock({
     'items|40': [{
-        imgName: '@integer(0, 40)',
+        // imgName: '@integer(0, 40)',
+        imgName: 'test.jpg',
         dlPrediction: '@integer(0, 7)',
         mlPrediction: '@integer(0, 7)',
-        label: '@integer(0, 7)'
+        label: '@integer(0, 7)',
     }]
 })
 

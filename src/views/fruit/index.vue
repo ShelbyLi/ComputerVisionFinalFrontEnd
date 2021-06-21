@@ -48,6 +48,18 @@
         </template>
         </el-table-column>
 
+        <el-table-column label="图像" width="200px" align="center">
+        <template slot-scope="{ row }">
+          <el-image
+              style="width: 100px; height: 100px"
+              :src= "require('@/assets/' + row.imgName)"
+              fit="scale-down"
+              :preview-src-list="[require('@/assets/' + row.imgName)]"></el-image>
+              <!-- <img class="pic-404__parent" src="../../assets/test.jpg" alt="404"> -->
+          <!-- <span>{{ row.imgName }}</span> -->
+        </template>
+        </el-table-column>
+
         <el-table-column label="深度学习预测结果" width="255px" align="center">
           <template slot-scope="{ row }">
             <!-- <span>{{ row.dlPrediction }}</span> -->
